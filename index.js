@@ -220,7 +220,8 @@ bot.use(stage.middleware());
 
 bot.command('text', (ctx) => { if (!paused) ctx.scene.enter('text') });
 bot.command('image', (ctx) => { if (!paused) ctx.scene.enter('image') });
-// pause or unpause bot
+// pause or unpause botemporarily");
+});
 bot.command('shutup', (ctx) => {
         paused = true;
         ctx.reply('FF shut up!');
@@ -230,12 +231,15 @@ bot.command('start', (ctx) => {
         paused = false;
         ctx.reply('You can speak now, FF');
 });
-bot.command('clear', (ctx) => {
-	ctx.reply("Begin cleaning all rules ... ");
-	textRules = [];
-	imageRules = [];
-	ctx.reply("All rules been cleared");
+bot.command('clear' (ctx) => {
+	ctx.reply("Clear feature has been removed temporarily");
 });
+// bot.command('clear', (ctx) => {
+// 	ctx.reply("Begin cleaning rules with keyword ... ");
+// 	textRules = [];
+// 	imageRules = [];
+// 	ctx.reply("All rules been cleared");
+// });
 
 // reply with text rules
 bot.on('text', (ctx) => {
