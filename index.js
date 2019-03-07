@@ -135,7 +135,7 @@ imageScene.leave((ctx) => {
 	state = 0;
 	sender = 0;
 });
-imageScene.command('cancel', () => {
+imageScene.command('cancel', (ctx) => {
 	state = 0;
 	sender = 0;
 	ctx.reply("Add image rule canceled.");
