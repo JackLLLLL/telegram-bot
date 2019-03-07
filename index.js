@@ -86,6 +86,7 @@ textScene.on('sticker', (ctx) => {
 			};
 			textRules.push(obj);
 			ctx.reply("Successfully added one rule.");
+			leave();
 			//ctx.reply(textRules);
 		} else if (state === 1) {
 			ctx.reply("Please send key word (length < 6).");
@@ -177,6 +178,7 @@ imageScene.on('sticker', (ctx) => {
 			};
 			imageRules.push(obj);
 			ctx.reply("Successfully added one rule.");
+			leave();
 			//ctx.reply(Rules);
 		} else if (state === 1) {
 			trigger = ctx.message.sticker.file_id;
