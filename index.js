@@ -20,7 +20,7 @@ imageRules = JSON.parse(fs.readFileSync('image.json', 'utf8'));
 const interval = setInterval(() => {
 	fs.writeFile('text.json', JSON.stringify(textRules), 'utf8');
 	fs.writeFile('image.json', JSON.stringify(imageRules), 'utf8');
-}, 3600*1000);
+}, 1800*1000);
 
 // add text rule
 var state = 0;
@@ -33,6 +33,8 @@ textScene.enter((ctx) => {
 	ctx.reply('Adding rule for text ...\nPlease enter a key word as trigger for this rule. \nUse /cancel to cancel.');
 });
 textScene.leave((ctx) => {
+	state = 0;
+	sender = 0;
 	ctx.reply("Add text rule canceled.");
 });
 textScene.command('cancel', () => {
@@ -49,9 +51,11 @@ textScene.on('text', (ctx) => {
 				state = 2;
 				ctx.reply(`Key word is ${trigger} \nPlease enter a number from 1 to 100.`);
 			} else if(state === 2) {
-				rate = ctx.message.text;
+				rate = parseInt(ctx.message.text, 10) || 100;
 				state = 3;
 				ctx.reply(`Percentage is ${rate} \nPlease send me a sticker.`);
+			} else if (state === 3) {
+				ctx.reply("Please send me a sticker.");
 			} else {
 				ctx.reply("Error");
 				state = 0;
@@ -62,7 +66,7 @@ textScene.on('text', (ctx) => {
 			ctx.reply("Key word too long.");
 		}
 	} else {
-		ctx.reply("Error");
+		ctx.reply("Someone else scared me. 溜了溜了");
 		sender = 0;
 		state = 0;
 		leave();
@@ -73,7 +77,7 @@ textScene.on('sticker', (ctx) => {
 		if (state === 3) {
 			reply = ctx.message.sticker.file_id;
 			state = 4;
-			ctx.replyWithSticker(reply);
+			//ctx.replyWithSticker(reply);
 
 			const obj = {
 				trigger: trigger,
@@ -82,7 +86,11 @@ textScene.on('sticker', (ctx) => {
 			};
 			textRules.push(obj);
 			ctx.reply("Successfully added one rule.");
-			ctx.reply(textRules);
+			//ctx.reply(textRules);
+		} else if (state === 1) {
+			ctx.reply("Please send key word (length < 6).");
+		} else if (state === 2) {
+			ctx.reply("Please enter a number from 1 to 100.");
 		} else {
 			ctx.reply("Error");
 			state = 0;
@@ -90,7 +98,7 @@ textScene.on('sticker', (ctx) => {
 			leave();
 		}
 	} else {
-		 ctx.reply("Error");
+		ctx.reply("Someone else scared me. 溜了溜了");
                 sender = 0;
                 state = 0;
                 leave();
@@ -104,7 +112,7 @@ textScene.on('message', (ctx) => {
 	} else if (state === 3) {
 		ctx.reply("Please send me a sticker.");
 	} else {
-		ctx.reply("Error");
+		ctx.reply("Internal Error");
 		state = 0;
 		sender = 0;
 		leave();
@@ -116,15 +124,94 @@ textScene.on('message', (ctx) => {
 const imageScene = new Scene('image');
 var state = 0;
 var trigger, rate, reply;
-textScene.enter((ctx) => {
+imagetScene.enter((ctx) => {
         state = 1;
         if (sender !== 0) leave();
         sender = ctx.message.from.id;
         ctx.reply("Adding rule for image ...\nPlease send a sticker as trigger for this rule. \nUse /cancel to cancel.");
 });
-textScene.leave((ctx) => {
-        ctx.reply("Add text rule canceled.");
+imageScene.leave((ctx) => {
+	state = 0;
+	sender = 0;
+        ctx.reply("Add image rule canceled.");
 });
+imageScene.command('cancel', () => {
+	state = 0;
+	sender = 0;
+	ctx.reply("Add image rule canceled.");
+	leave();
+});
+imageScene.on('text', (ctx) => {
+	if (sender === ctx.message.from.id) {
+		if (state === 1) {
+			ctx.reply("Please send me a sticker.");
+		} else if(state === 2) {
+			rate = parseInt(ctx.message.text, 10) || 100;
+			state = 3;
+			ctx.reply(`Percentage is ${rate} \nPlease send me a sticker.`);
+		} else if (state === 3) {
+			ctx.reply("Please send me a sticker.");
+		} else {
+			ctx.reply("Error");
+			state = 0;
+			sender = 0;
+			leave();
+		}
+	} else {
+		ctx.reply("Someone else scared me. 溜了溜了");
+		sender = 0;
+		state = 0;
+		leave();
+	}
+});
+imageScene.on('sticker', (ctx) => {
+	if (sender === ctx.message.from.id) {
+		if (state === 3) {
+			reply = ctx.message.sticker.file_id;
+			state = 4;
+
+			const obj = {
+				trigger: trigger,
+				rate: parseInt(rate, 10),
+				reply: reply
+			};
+			imageRules.push(obj);
+			ctx.reply("Successfully added one rule.");
+			//ctx.reply(Rules);
+		} else if (state === 1) {
+			trigger = ctx.message.sticker.file_id;
+			state = 2;
+			ctx.reply(`Key word is ${trigger} \nPlease enter a number from 1 to 100.`);
+		} else if (state === 2) {
+			ctx.reply("Please enter a number from 1 to 100.");
+		} else {
+			ctx.reply("Error");
+			state = 0;
+			sender = 0;
+			leave();
+		}
+	} else {
+		ctx.reply("Someone else scared me. 溜了溜了");
+                sender = 0;
+                state = 0;
+                leave();
+	}
+});
+textScene.on('message', (ctx) => {
+	if (state === 1) {
+		ctx.reply("Please send me a sticker.");
+	} else if (state === 2) {
+		ctx.reply("Please enter a number from 1 to 100.");
+	} else if (state === 3) {
+		ctx.reply("Please send me a sticker.");
+	} else {
+		ctx.reply("Internal Error");
+		state = 0;
+		sender = 0;
+		leave();
+	}
+});
+
 
 const bot = new Telegraf(process.env.BOTTOKEN);
 const stage = new Stage([textScene, imageScene], { ttl: 10 });
