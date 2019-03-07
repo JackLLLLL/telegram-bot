@@ -1,0 +1,16 @@
+{
+  "name": "jiechawang",
+  "version": "1.0.0",
+  "description": "telegram bot",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "telegraf": "^3.27.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "JackLLLLL",
+  "license": "MIT"
+}
