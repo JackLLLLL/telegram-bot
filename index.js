@@ -234,7 +234,7 @@ bot.command('delete', (ctx) => {
 		ctx.reply("Please give exact one key word");
 	} else {
 		const keyWord = ctx.state.command.splitArgs[0];
-		ctx.reply(`Deleting rules with keyword ${keyWord} ...`);
+		//ctx.reply(`Deleting rules with keyword ${keyWord} ...`);
 		textRules.forEach(rule => {
 			if (rule.author === ctx.message.from.id) {
 				if (rule.trigger === keyWord) { // lazy delete
