@@ -231,7 +231,7 @@ bot.command('start', (ctx) => {
         paused = false;
         ctx.reply('You can speak now, FF');
 });
-bot.command('clear' (ctx) => {
+bot.command('clear', (ctx) => {
 	ctx.reply("Clear feature has been removed temporarily");
 });
 // bot.command('clear', (ctx) => {
