@@ -35,7 +35,6 @@ textScene.enter((ctx) => {
 textScene.leave((ctx) => {
 	state = 0;
 	sender = 0;
-	ctx.reply("Add text rule canceled.");
 });
 textScene.command('cancel', (ctx) => {
 	state = 0;
@@ -134,7 +133,6 @@ imageScene.enter((ctx) => {
 imageScene.leave((ctx) => {
 	state = 0;
 	sender = 0;
-        ctx.reply("Add image rule canceled.");
 });
 imageScene.command('cancel', () => {
 	state = 0;
@@ -220,8 +218,8 @@ const stage = new Stage([textScene, imageScene], { ttl: 30 });
 bot.use(session());
 bot.use(stage.middleware());
 
-bot.command('text', enter('text'));
-bot.command('image', enter('image'));
+bot.command('text', (ctx) => { if (!paused) ctx.scene.enter('text') });
+bot.command('image', (ctx) => { if (!paused) ctx.scene.enter('image') });
 // pause or unpause bot
 bot.command('shutup', (ctx) => {
         paused = true;
@@ -244,6 +242,7 @@ bot.on('text', (ctx) => {
                                 if (Math.random()*100 < rule.rate) {
                                         ctx.replyWithSticker(rule.reply);
                                 }
+				break;
                         }
                 });
         }
@@ -258,6 +257,7 @@ bot.on('sticker', (ctx) => {
                                 if (Math.random()*100 < rule.rate) {
                                         ctx.replyWithSticker(rule.reply);
                                 }
+				break;
                         }
                 });
         }
