@@ -220,8 +220,6 @@ bot.use(stage.middleware());
 
 bot.command('text', (ctx) => { if (!paused) ctx.scene.enter('text') });
 bot.command('image', (ctx) => { if (!paused) ctx.scene.enter('image') });
-// pause or unpause botemporarily");
-});
 bot.command('shutup', (ctx) => {
         paused = true;
         ctx.reply('FF shut up!');
