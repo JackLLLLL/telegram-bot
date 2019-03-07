@@ -242,7 +242,7 @@ bot.on('text', (ctx) => {
                                 if (Math.random()*100 < rule.rate) {
                                         ctx.replyWithSticker(rule.reply);
                                 }
-				break;
+				return;
                         }
                 });
         }
@@ -257,7 +257,7 @@ bot.on('sticker', (ctx) => {
                                 if (Math.random()*100 < rule.rate) {
                                         ctx.replyWithSticker(rule.reply);
                                 }
-				break;
+				return;
                         }
                 });
         }
