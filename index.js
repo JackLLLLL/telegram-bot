@@ -242,15 +242,12 @@ bot.on('text', (ctx) => {
         if (!paused && ctx.message.from.id !== sender) {
                 sender = 0;
                 //ctx.reply(ctx.message);
-                textRules.every(rule => {
+                textRules.forEach(rule => {
                         if (ctx.message.text !== undefined && ctx.message.text.includes(rule.trigger)) {
                                 if (Math.random()*100 < rule.rate) {
                                         ctx.replyWithSticker(rule.reply);
-					return false;
                                 }
-                        } else {
-				return true;
-			}
+                        }
                 });
         }
 });
@@ -259,15 +256,12 @@ bot.on('text', (ctx) => {
 bot.on('sticker', (ctx) => {
         if (!paused && ctx.message.from.id !== sender) {
                 sender = 0;
-                imageRules.every(rule => {
+                imageRules.forEach(rule => {
                         if (ctx.message.sticker !== undefined && ctx.message.sticker.file_id === rule.trigger) {
                                 if (Math.random()*100 < rule.rate) {
                                         ctx.replyWithSticker(rule.reply);
-					return false;
 				}
-                        } else {
-				return true;
-			}
+                        }
                 });
         }
 });
