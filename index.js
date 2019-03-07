@@ -219,6 +219,7 @@ const bot = new Telegraf(process.env.BOTTOKEN);
 const stage = new Stage([textScene, imageScene], { ttl: 30 });
 bot.use(session());
 bot.use(stage.middleware());
+app.use(commandParts());
 
 bot.command('text', (ctx) => { if (!paused) ctx.scene.enter('text') });
 bot.command('image', (ctx) => { if (!paused) ctx.scene.enter('image') });
