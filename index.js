@@ -1,4 +1,5 @@
 const Telegraf = require('telegraf');
+const commandParts = require('telegraf-command-parts');
 const session = require('telegraf/session');
 const Stage = require('telegraf/stage');
 const Scene = require('telegraf/scenes/base');
@@ -10,7 +11,6 @@ var textRules = [];
 var imageRules = [];
 var paused = false;
 var sender = 0;
-
 
 // load rules at start
 textRules = JSON.parse(fs.readFileSync('text.json', 'utf8'));
@@ -65,10 +65,10 @@ textScene.on('text', (ctx) => {
 			ctx.reply("Key word too long.");
 		}
 	} else {
-		ctx.reply("Someone else scared me. 溜了溜了");
-		sender = 0;
-		state = 0;
-		ctx.scene.leave();
+// 		ctx.reply("Someone else scared me. 溜了溜了");
+// 		sender = 0;
+// 		state = 0;
+// 		ctx.scene.leave();
 	}
 });
 textScene.on('sticker', (ctx) => {
@@ -81,7 +81,8 @@ textScene.on('sticker', (ctx) => {
 			const obj = {
 				trigger: trigger,
 				rate: Math.max(Math.min(parseInt(rate, 10), 100), 0),
-				reply: reply
+				reply: reply,
+				author: sender,
 			};
 			textRules.push(obj);
 			ctx.reply("Successfully added one rule.");
@@ -98,10 +99,10 @@ textScene.on('sticker', (ctx) => {
 			ctx.scene.leave();
 		}
 	} else {
-		ctx.reply("Someone else scared me. 溜了溜了");
-                sender = 0;
-                state = 0;
-                ctx.scene.leave();
+// 		ctx.reply("Someone else scared me. 溜了溜了");
+//                 sender = 0;
+//                 state = 0;
+//                 ctx.scene.leave();
 	}
 });
 textScene.on('message', (ctx) => {
@@ -157,10 +158,10 @@ imageScene.on('text', (ctx) => {
 			ctx.scene.leave();
 		}
 	} else {
-		ctx.reply("Someone else scared me. 溜了溜了");
-		sender = 0;
-		state = 0;
-		ctx.scene.leave();
+// 		ctx.reply("Someone else scared me. 溜了溜了");
+// 		sender = 0;
+// 		state = 0;
+// 		ctx.scene.leave();
 	}
 });
 imageScene.on('sticker', (ctx) => {
@@ -172,7 +173,8 @@ imageScene.on('sticker', (ctx) => {
 			const obj = {
 				trigger: trigger,
 				rate: Math.max(Math.min(parseInt(rate, 10), 100), 0),
-				reply: reply
+				reply: reply,
+				author: sender,
 			};
 			imageRules.push(obj);
 			ctx.reply("Successfully added one rule.");
@@ -191,10 +193,10 @@ imageScene.on('sticker', (ctx) => {
 			ctx.scene.leave();
 		}
 	} else {
-		ctx.reply("Someone else scared me. 溜了溜了");
-                sender = 0;
-                state = 0;
-                ctx.scene.leave();
+// 		ctx.reply("Someone else scared me. 溜了溜了");
+//                 sender = 0;
+//                 state = 0;
+//                 ctx.scene.leave();
 	}
 });
 imageScene.on('message', (ctx) => {
@@ -224,7 +226,20 @@ bot.command('shutup', (ctx) => {
         paused = true;
         ctx.reply('FF shut up!');
 });
-
+bot.command('delete' (ctx) => {
+	if (ctx.state.command.splitArgs.length !== 1) {
+		ctx.reply("Please give exact one key word");
+	} else {
+		const keyWord = ctx.state.command.splitArgs[0];
+		textRules.forEach(rule => {
+			if (rule.author === ctx.message.from.id) {
+				if (rule.trigger === keyWord) { // lazy delete
+					rule.rate = 0;
+				}
+			}
+		})
+	}
+});
 bot.command('start', (ctx) => {
         paused = false;
         ctx.reply('You can speak now, FF');
@@ -243,11 +258,13 @@ bot.command('clear', (ctx) => {
 bot.on('text', (ctx) => {
         if (!paused && ctx.message.from.id !== sender) {
                 sender = 0;
+		let 
                 //ctx.reply(ctx.message);
-                textRules.forEach(rule => {
+                for (rule of textRules) {
                         if (ctx.message.text !== undefined && ctx.message.text.includes(rule.trigger)) {
                                 if (Math.random()*100 < rule.rate) {
-                                        ctx.replyWithSticker(rule.reply);
+                                       ctx.replyWithSticker(rule.reply);
+					break;
                                 }
                         }
                 });
@@ -258,10 +275,11 @@ bot.on('text', (ctx) => {
 bot.on('sticker', (ctx) => {
         if (!paused && ctx.message.from.id !== sender) {
                 sender = 0;
-                imageRules.forEach(rule => {
+                for (rule of imageRules) {
                         if (ctx.message.sticker !== undefined && ctx.message.sticker.file_id === rule.trigger) {
                                 if (Math.random()*100 < rule.rate) {
                                         ctx.replyWithSticker(rule.reply);
+					break;
 				}
                         }
                 });
