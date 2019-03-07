@@ -28,7 +28,7 @@ var trigger, rate, reply;
 const textScene = new Scene('text');
 textScene.enter((ctx) => {
 	state = 1;
-	if (sender !== 0) leave();
+	if (sender !== 0) ctx.scene.leave();;
 	sender = ctx.message.from.id;
 	ctx.reply('Adding rule for text ...\nPlease enter a key word as trigger for this rule. \nUse /cancel to cancel.');
 });
@@ -37,14 +37,13 @@ textScene.leave((ctx) => {
 	sender = 0;
 	ctx.reply("Add text rule canceled.");
 });
-textScene.command('cancel', () => {
+textScene.command('cancel', (ctx) => {
 	state = 0;
 	sender = 0;
 	ctx.reply("Add text rule canceled.");
-	leave();
+	ctx.scene.leave();
 });
 textScene.on('text', (ctx) => {
-	ctx.scene.leave();
 	if (sender === ctx.message.from.id) {
 		if (ctx.message.text.length > 0 && ctx.message.text.length < 6) {
 			if (state === 1) {
@@ -61,7 +60,7 @@ textScene.on('text', (ctx) => {
 				ctx.reply("Error");
 				state = 0;
 				sender = 0;
-				leave();
+				ctx.scene.leave();
 			}
 		} else {
 			ctx.reply("Key word too long.");
@@ -70,7 +69,7 @@ textScene.on('text', (ctx) => {
 		ctx.reply("Someone else scared me. 溜了溜了");
 		sender = 0;
 		state = 0;
-		leave();
+		ctx.scene.leave();
 	}
 });
 textScene.on('sticker', (ctx) => {
@@ -87,7 +86,7 @@ textScene.on('sticker', (ctx) => {
 			};
 			textRules.push(obj);
 			ctx.reply("Successfully added one rule.");
-			leave();
+			ctx.scene.leave();
 			//ctx.reply(textRules);
 		} else if (state === 1) {
 			ctx.reply("Please send key word (length < 6).");
@@ -97,13 +96,13 @@ textScene.on('sticker', (ctx) => {
 			ctx.reply("Error");
 			state = 0;
 			sender = 0;
-			leave();
+			ctx.scene.leave();
 		}
 	} else {
 		ctx.reply("Someone else scared me. 溜了溜了");
                 sender = 0;
                 state = 0;
-                leave();
+                ctx.scene.leave();
 	}
 });
 textScene.on('message', (ctx) => {
@@ -117,7 +116,7 @@ textScene.on('message', (ctx) => {
 		ctx.reply("Internal Error");
 		state = 0;
 		sender = 0;
-		leave();
+		ctx.scene.leave();
 	}
 });
 
@@ -128,7 +127,7 @@ var state = 0;
 var trigger, rate, reply;
 imageScene.enter((ctx) => {
         state = 1;
-        if (sender !== 0) leave();
+        if (sender !== 0) ctx.scene.leave();;
         sender = ctx.message.from.id;
         ctx.reply("Adding rule for image ...\nPlease send a sticker as trigger for this rule. \nUse /cancel to cancel.");
 });
@@ -141,7 +140,7 @@ imageScene.command('cancel', () => {
 	state = 0;
 	sender = 0;
 	ctx.reply("Add image rule canceled.");
-	leave();
+	ctx.scene.leave();;
 });
 imageScene.on('text', (ctx) => {
 	if (sender === ctx.message.from.id) {
@@ -157,13 +156,13 @@ imageScene.on('text', (ctx) => {
 			ctx.reply("Error");
 			state = 0;
 			sender = 0;
-			leave();
+			ctx.scene.leave();;
 		}
 	} else {
 		ctx.reply("Someone else scared me. 溜了溜了");
 		sender = 0;
 		state = 0;
-		leave();
+		ctx.scene.leave();;
 	}
 });
 imageScene.on('sticker', (ctx) => {
@@ -179,7 +178,7 @@ imageScene.on('sticker', (ctx) => {
 			};
 			imageRules.push(obj);
 			ctx.reply("Successfully added one rule.");
-			leave();
+			ctx.scene.leave();;
 			//ctx.reply(Rules);
 		} else if (state === 1) {
 			trigger = ctx.message.sticker.file_id;
@@ -191,13 +190,13 @@ imageScene.on('sticker', (ctx) => {
 			ctx.reply("Error");
 			state = 0;
 			sender = 0;
-			leave();
+			ctx.scene.leave();;
 		}
 	} else {
 		ctx.reply("Someone else scared me. 溜了溜了");
                 sender = 0;
                 state = 0;
-                leave();
+                ctx.scene.leave();;
 	}
 });
 imageScene.on('message', (ctx) => {
@@ -211,7 +210,7 @@ imageScene.on('message', (ctx) => {
 		ctx.reply("Internal Error");
 		state = 0;
 		sender = 0;
-		leave();
+		ctx.scene.leave();;
 	}
 });
 
