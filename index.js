@@ -226,7 +226,7 @@ bot.command('shutup', (ctx) => {
         paused = true;
         ctx.reply('FF shut up!');
 });
-bot.command('delete' (ctx) => {
+bot.command('delete', (ctx) => {
 	if (ctx.state.command.splitArgs.length !== 1) {
 		ctx.reply("Please give exact one key word");
 	} else {
