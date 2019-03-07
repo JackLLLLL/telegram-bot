@@ -44,6 +44,7 @@ textScene.command('cancel', () => {
 	leave();
 });
 textScene.on('text', (ctx) => {
+	Stage.leave();
 	if (sender === ctx.message.from.id) {
 		if (ctx.message.text.length > 0 && ctx.message.text.length < 6) {
 			if (state === 1) {
