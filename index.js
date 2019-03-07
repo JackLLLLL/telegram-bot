@@ -124,7 +124,7 @@ textScene.on('message', (ctx) => {
 const imageScene = new Scene('image');
 var state = 0;
 var trigger, rate, reply;
-imagetScene.enter((ctx) => {
+imageScene.enter((ctx) => {
         state = 1;
         if (sender !== 0) leave();
         sender = ctx.message.from.id;
@@ -197,7 +197,7 @@ imageScene.on('sticker', (ctx) => {
                 leave();
 	}
 });
-textScene.on('message', (ctx) => {
+imageScene.on('message', (ctx) => {
 	if (state === 1) {
 		ctx.reply("Please send me a sticker.");
 	} else if (state === 2) {
