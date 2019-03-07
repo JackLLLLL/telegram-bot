@@ -154,13 +154,13 @@ imageScene.on('text', (ctx) => {
 			ctx.reply("Error");
 			state = 0;
 			sender = 0;
-			ctx.scene.leave();;
+			ctx.scene.leave();
 		}
 	} else {
 		ctx.reply("Someone else scared me. 溜了溜了");
 		sender = 0;
 		state = 0;
-		ctx.scene.leave();;
+		ctx.scene.leave();
 	}
 });
 imageScene.on('sticker', (ctx) => {
@@ -176,7 +176,7 @@ imageScene.on('sticker', (ctx) => {
 			};
 			imageRules.push(obj);
 			ctx.reply("Successfully added one rule.");
-			ctx.scene.leave();;
+			ctx.scene.leave();
 			//ctx.reply(Rules);
 		} else if (state === 1) {
 			trigger = ctx.message.sticker.file_id;
@@ -188,13 +188,13 @@ imageScene.on('sticker', (ctx) => {
 			ctx.reply("Error");
 			state = 0;
 			sender = 0;
-			ctx.scene.leave();;
+			ctx.scene.leave();
 		}
 	} else {
 		ctx.reply("Someone else scared me. 溜了溜了");
                 sender = 0;
                 state = 0;
-                ctx.scene.leave();;
+                ctx.scene.leave();
 	}
 });
 imageScene.on('message', (ctx) => {
@@ -208,7 +208,7 @@ imageScene.on('message', (ctx) => {
 		ctx.reply("Internal Error");
 		state = 0;
 		sender = 0;
-		ctx.scene.leave();;
+		ctx.scene.leave();
 	}
 });
 
