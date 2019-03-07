@@ -266,7 +266,7 @@ bot.on('text', (ctx) => {
 					break;
                                 }
                         }
-                });
+                };
         }
 });
 
@@ -281,7 +281,7 @@ bot.on('sticker', (ctx) => {
 					break;
 				}
                         }
-                });
+                };
         }
 });
 bot.launch();
