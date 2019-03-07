@@ -230,20 +230,27 @@ bot.command('start', (ctx) => {
         paused = false;
         ctx.reply('You can speak now, FF');
 });
-
+bot.command('clear', (ctx) => {
+	ctx.reply("Begin cleaning all rules ... ");
+	textRules = [];
+	imageRules = [];
+	ctx.reply("All rules been cleared");
+});
 
 // reply with text rules
 bot.on('text', (ctx) => {
         if (!paused && ctx.message.from.id !== sender) {
                 sender = 0;
                 //ctx.reply(ctx.message);
-                textRules.forEach(rule => {
+                textRules.every(rule => {
                         if (ctx.message.text !== undefined && ctx.message.text.includes(rule.trigger)) {
                                 if (Math.random()*100 < rule.rate) {
                                         ctx.replyWithSticker(rule.reply);
+					return false;
                                 }
-				return;
-                        }
+                        } else {
+				return true;
+			}
                 });
         }
 });
@@ -252,13 +259,15 @@ bot.on('text', (ctx) => {
 bot.on('sticker', (ctx) => {
         if (!paused && ctx.message.from.id !== sender) {
                 sender = 0;
-                imageRules.forEach(rule => {
+                imageRules.every(rule => {
                         if (ctx.message.sticker !== undefined && ctx.message.sticker.file_id === rule.trigger) {
                                 if (Math.random()*100 < rule.rate) {
                                         ctx.replyWithSticker(rule.reply);
-                                }
-				return;
-                        }
+					return false;
+				}
+                        } else {
+				return true;
+			}
                 });
         }
 });
