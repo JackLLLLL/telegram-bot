@@ -49,7 +49,7 @@ textScene.on('text', (ctx) => {
 			if (state === 1) {
 				trigger = ctx.message.text;
 				state = 2;
-				ctx.reply(`Key word is ${trigger} \nPlease enter a number from 1 to 100.`);
+				ctx.reply(`Key word is ${trigger} \nPlease enter a trigger rate from 1 to 100.`);
 			} else if(state === 2) {
 				rate = parseInt(ctx.message.text, 10) || 100;
 				state = 3;
@@ -181,7 +181,7 @@ imageScene.on('sticker', (ctx) => {
 		} else if (state === 1) {
 			trigger = ctx.message.sticker.file_id;
 			state = 2;
-			ctx.reply(`Key word is ${trigger} \nPlease enter a number from 1 to 100.`);
+			ctx.reply(`Key word is ${trigger} \nPlease enter a trigger rate from 1 to 100.`);
 		} else if (state === 2) {
 			ctx.reply("Please enter a number from 1 to 100.");
 		} else {
