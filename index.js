@@ -83,6 +83,7 @@ textScene.on('sticker', (ctx) => {
 				rate: Math.max(Math.min(parseInt(rate, 10), 100), 0),
 				reply: reply,
 				author: sender,
+				firstName: ctx.message.from.first_name,
 			};
 			textRules.push(obj);
 			ctx.reply("Successfully added one rule.");
@@ -175,6 +176,7 @@ imageScene.on('sticker', (ctx) => {
 				rate: Math.max(Math.min(parseInt(rate, 10), 100), 0),
 				reply: reply,
 				author: sender,
+				firstName: ctx.message.from.first_name,
 			};
 			imageRules.push(obj);
 			ctx.reply("Successfully added one rule.");
@@ -240,7 +242,7 @@ bot.command('delete', (ctx) => {
 					ctx.reply("All related rules deleted");
 				}
 			} else {
-			 	ctx.reply("You are not author");
+			 	ctx.reply(`You are not author. This rule belongs to ${rule.firstName}`);
 			}
 		})
 	}
