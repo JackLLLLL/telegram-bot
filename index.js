@@ -78,10 +78,10 @@ textScene.on('sticker', (ctx) => {
 			reply = ctx.message.sticker.file_id;
 			state = 4;
 			//ctx.replyWithSticker(reply);
-
+			ctx.reply(`Sticker received ${reply}`);
 			const obj = {
 				trigger: trigger,
-				rate: parseInt(rate, 10),
+				rate: Math.max(Math.min(parseInt(rate, 10), 100), 0),
 				reply: reply
 			};
 			textRules.push(obj);
@@ -169,10 +169,10 @@ imageScene.on('sticker', (ctx) => {
 		if (state === 3) {
 			reply = ctx.message.sticker.file_id;
 			state = 4;
-
+			ctx.reply(`Sticker received ${reply}`);
 			const obj = {
 				trigger: trigger,
-				rate: parseInt(rate, 10),
+				rate: Math.max(Math.min(parseInt(rate, 10), 100), 0),
 				reply: reply
 			};
 			imageRules.push(obj);
