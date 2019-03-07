@@ -64,7 +64,7 @@ textScene.on('text', (ctx) => {
 		} else {
 			ctx.reply("Key word too long.");
 		}
-	} else {
+//	} else {
 // 		ctx.reply("Someone else scared me. 溜了溜了");
 // 		sender = 0;
 // 		state = 0;
@@ -98,7 +98,7 @@ textScene.on('sticker', (ctx) => {
 			sender = 0;
 			ctx.scene.leave();
 		}
-	} else {
+//	} else {
 // 		ctx.reply("Someone else scared me. 溜了溜了");
 //                 sender = 0;
 //                 state = 0;
@@ -157,7 +157,7 @@ imageScene.on('text', (ctx) => {
 			sender = 0;
 			ctx.scene.leave();
 		}
-	} else {
+//	} else {
 // 		ctx.reply("Someone else scared me. 溜了溜了");
 // 		sender = 0;
 // 		state = 0;
@@ -192,7 +192,7 @@ imageScene.on('sticker', (ctx) => {
 			sender = 0;
 			ctx.scene.leave();
 		}
-	} else {
+//	} else {
 // 		ctx.reply("Someone else scared me. 溜了溜了");
 //                 sender = 0;
 //                 state = 0;
@@ -258,7 +258,6 @@ bot.command('clear', (ctx) => {
 bot.on('text', (ctx) => {
         if (!paused && ctx.message.from.id !== sender) {
                 sender = 0;
-		let 
                 //ctx.reply(ctx.message);
                 for (rule of textRules) {
                         if (ctx.message.text !== undefined && ctx.message.text.includes(rule.trigger)) {
