@@ -66,7 +66,7 @@ textScene.on('text', (ctx) => {
 			ctx.reply("Key word too long.");
 		}
 	} else {
-		//ctx.reply("Someone else scared me. 溜了溜了");
+		ctx.reply("Someone else scared me. 溜了溜了");
 		sender = 0;
 		state = 0;
 		leave();
@@ -99,7 +99,7 @@ textScene.on('sticker', (ctx) => {
 			leave();
 		}
 	} else {
-		//ctx.reply("Someone else scared me. 溜了溜了");
+		ctx.reply("Someone else scared me. 溜了溜了");
                 sender = 0;
                 state = 0;
                 leave();
@@ -159,7 +159,7 @@ imageScene.on('text', (ctx) => {
 			leave();
 		}
 	} else {
-		//ctx.reply("Someone else scared me. 溜了溜了");
+		ctx.reply("Someone else scared me. 溜了溜了");
 		sender = 0;
 		state = 0;
 		leave();
@@ -193,7 +193,7 @@ imageScene.on('sticker', (ctx) => {
 			leave();
 		}
 	} else {
-		//ctx.reply("Someone else scared me. 溜了溜了");
+		ctx.reply("Someone else scared me. 溜了溜了");
                 sender = 0;
                 state = 0;
                 leave();
