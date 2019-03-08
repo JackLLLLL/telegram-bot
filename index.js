@@ -236,14 +236,14 @@ bot.command('delete', (ctx) => {
 		const keyWord = ctx.state.command.splitArgs[0];
 		//ctx.reply(`Deleting rules with keyword ${keyWord} ...`);
 		textRules.forEach(rule => {
-			if (rule.author === ctx.message.from.id) {
-				if (rule.trigger === keyWord) { // lazy delete
+			if (rule.trigger === keyWord) {
+				if (rule.author === ctx.message.from.id) { // lazy delete
 					rule.rate = 0;
 					ctx.reply("All related rules deleted");
+				} else {
+					ctx.reply(`You are not author. This rule belongs to ${rule.firstName}`);
 				}
-			} else {
-			 	ctx.reply(`You are not author. This rule belongs to ${rule.firstName}`);
-			}
+			} 
 		})
 	}
 });
