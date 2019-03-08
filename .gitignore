@@ -1,1 +1,9 @@
- 
+# environment config
+.env
+.ENV 
+
+# data
+*.json
+
+# modules
+/node_modules

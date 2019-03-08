@@ -20,7 +20,7 @@ imageRules = JSON.parse(fs.readFileSync('image.json', 'utf8'));
 const interval = setInterval(() => {
 	fs.writeFileSync('text.json', JSON.stringify(textRules), 'utf8');
 	fs.writeFileSync('image.json', JSON.stringify(imageRules), 'utf8');
-}, 1000);
+}, 600*1000);
 
 // add text rule
 var state = 0;
