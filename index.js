@@ -20,13 +20,13 @@ imageRules = JSON.parse(fs.readFileSync('image.json', 'utf8'));
 const writeInterval = setInterval(() => {
 	fs.writeFileSync('text.json', JSON.stringify(textRules), 'utf8');
 	fs.writeFileSync('image.json', JSON.stringify(imageRules), 'utf8');
-}, 600*1000);
+}, 1800*1000);
 
 // tidy rules every day
 const tidyInterval = setInterval(() => {
 	textRules = tidyRules(textRules);
 	imageRules = tidyRules(imageRules);
-}, 60*1000);
+}, 86400*1000);
 
 // tidy function, delete rules with 0 rate and with same trigger and same author
 const tidyRules = (ruleSet) => {
