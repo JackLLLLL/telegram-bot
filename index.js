@@ -260,7 +260,7 @@ bot.command('delete', (ctx) => {
 				}
 			} 
 		}
-		foundOne && ctx.reply("Rule not found");
+		!foundOne && ctx.reply("Rule not found");
 	}
 });
 bot.command('start', (ctx) => {
