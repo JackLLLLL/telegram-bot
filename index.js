@@ -17,10 +17,29 @@ textRules = JSON.parse(fs.readFileSync('text.json', 'utf8'));
 imageRules = JSON.parse(fs.readFileSync('image.json', 'utf8'));
 
 // rewrite rules into files
-const interval = setInterval(() => {
+const writeInterval = setInterval(() => {
 	fs.writeFileSync('text.json', JSON.stringify(textRules), 'utf8');
 	fs.writeFileSync('image.json', JSON.stringify(imageRules), 'utf8');
 }, 600*1000);
+
+// tidy rules every day
+const tidyInterval = setInterval(() => {
+	textRules = tidyRules(textRules);
+	imageRules = tidyRules(imageRules);
+}, 60*1000);
+
+// tidy function, delete rules with 0 rate and with same trigger and same author
+const tidyRules = (ruleSet) => {
+	let newSet = [];
+	let validMap = new Map(); // to remove duplicate rules
+	for (rule of ruleSet) {
+		if (rule.rate !== 0 && !validMap.has(`${rule.trigger}@${rule.author}`)) {
+			validMap.set(`${rule.trigger}@${rule.author}`, 1);
+			newSet.push(rule);
+		}
+	}
+	return newSet;
+}
 
 // add text rule
 var state = 0;
