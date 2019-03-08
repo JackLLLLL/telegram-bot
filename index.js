@@ -247,7 +247,7 @@ bot.command('delete', (ctx) => {
 					ctx.reply(`You are not author. This rule belongs to ${rule.firstName}`);
 				}
 			} 
-		})
+		}
 		// image rules
 		for (rule of imageRules) {
 			if (rule.trigger === keyWord) {
@@ -259,7 +259,7 @@ bot.command('delete', (ctx) => {
 					ctx.reply(`You are not author. This rule belongs to ${rule.firstName}`);
 				}
 			} 
-		})
+		}
 		foundOne && ctx.reply("Rule not found");
 	}
 });
