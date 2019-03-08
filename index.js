@@ -234,17 +234,33 @@ bot.command('delete', (ctx) => {
 		ctx.reply("Please give exact one key word");
 	} else {
 		const keyWord = ctx.state.command.splitArgs[0];
+		let foundOne = false;
 		//ctx.reply(`Deleting rules with keyword ${keyWord} ...`);
-		textRules.forEach(rule => {
+		// text rules
+		for (rule of textRules) {
 			if (rule.trigger === keyWord) {
 				if (rule.author === ctx.message.from.id) { // lazy delete
 					rule.rate = 0;
 					ctx.reply("All related rules deleted");
+					foundOne = true;
 				} else {
 					ctx.reply(`You are not author. This rule belongs to ${rule.firstName}`);
 				}
 			} 
 		})
+		// image rules
+		for (rule of imageRules) {
+			if (rule.trigger === keyWord) {
+				if (rule.author === ctx.message.from.id) { // lazy delete
+					rule.rate = 0;
+					ctx.reply("All related rules deleted");
+					foundOne = true;
+				} else {
+					ctx.reply(`You are not author. This rule belongs to ${rule.firstName}`);
+				}
+			} 
+		})
+		foundOne && ctx.reply("Rule not found");
 	}
 });
 bot.command('start', (ctx) => {
