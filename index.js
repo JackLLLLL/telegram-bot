@@ -67,15 +67,15 @@ textScene.on('text', (ctx) => {
 			if (state === 1) {
 				trigger = ctx.message.text;
 				state = 2;
-				ctx.reply(`Key word is ${trigger} \nPlease enter a trigger rate from 1 to 100.`);
+				ctx.reply(`Key word is ${trigger} \nPlease enter a trigger rate from 1 to 100(%).`);
 			} else if(state === 2) {
 				rate = parseInt(ctx.message.text, 10) || 100;
 				state = 3;
-				ctx.reply(`Percentage is ${rate} \nPlease send me a sticker.`);
+				ctx.reply(`Percentage is ${rate}% \nPlease send me a sticker.`);
 			} else if (state === 3) {
 				ctx.reply("Please send me a sticker.");
 			} else {
-				ctx.reply("Error");
+				ctx.reply("Unknown error.");
 				state = 0;
 				sender = 0;
 				ctx.scene.leave();
@@ -111,9 +111,9 @@ textScene.on('sticker', (ctx) => {
 		} else if (state === 1) {
 			ctx.reply("Please send key word (length < 6).");
 		} else if (state === 2) {
-			ctx.reply("Please enter a number from 1 to 100.");
+			ctx.reply("Please enter a number from 1 to 100(%).");
 		} else {
-			ctx.reply("Error");
+			ctx.reply("Unknown error.");
 			state = 0;
 			sender = 0;
 			ctx.scene.leave();
@@ -129,7 +129,7 @@ textScene.on('message', (ctx) => {
 	if (state === 1) {
 		ctx.reply("Please send key word (length < 6).");
 	} else if (state === 2) {
-		ctx.reply("Please enter a number from 1 to 100.");
+		ctx.reply("Please enter a number from 1 to 100(%).");
 	} else if (state === 3) {
 		ctx.reply("Please send me a sticker.");
 	} else {
@@ -172,7 +172,7 @@ imageScene.on('text', (ctx) => {
 		} else if (state === 3) {
 			ctx.reply("Please send me a sticker.");
 		} else {
-			ctx.reply("Error");
+			ctx.reply("Unknown error.");
 			state = 0;
 			sender = 0;
 			ctx.scene.leave();
@@ -204,11 +204,11 @@ imageScene.on('sticker', (ctx) => {
 		} else if (state === 1) {
 			trigger = ctx.message.sticker.file_id;
 			state = 2;
-			ctx.reply(`Key word is ${trigger} \nPlease enter a trigger rate from 1 to 100.`);
+			ctx.reply(`Key word is ${trigger} \nPlease enter a trigger rate from 1 to 100(%).`);
 		} else if (state === 2) {
 			ctx.reply("Please enter a number from 1 to 100.");
 		} else {
-			ctx.reply("Error");
+			ctx.reply("Unknown error.");
 			state = 0;
 			sender = 0;
 			ctx.scene.leave();
@@ -224,7 +224,7 @@ imageScene.on('message', (ctx) => {
 	if (state === 1) {
 		ctx.reply("Please send me a sticker.");
 	} else if (state === 2) {
-		ctx.reply("Please enter a number from 1 to 100.");
+		ctx.reply("Please enter a number from 1 to 100(%).");
 	} else if (state === 3) {
 		ctx.reply("Please send me a sticker.");
 	} else {
