@@ -245,6 +245,7 @@ bot.command('delete', (ctx) => {
 					foundOne = true;
 				} else {
 					ctx.reply(`You are not author. This rule belongs to ${rule.firstName}`);
+					foundOne = true;
 				}
 			} 
 		}
@@ -257,6 +258,7 @@ bot.command('delete', (ctx) => {
 					foundOne = true;
 				} else {
 					ctx.reply(`You are not author. This rule belongs to ${rule.firstName}`);
+					foundOne = true;
 				}
 			} 
 		}
