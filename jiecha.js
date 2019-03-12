@@ -236,7 +236,6 @@ const jiechaBot = () => {
     });
 
 
-    const bot = new Telegraf(process.env.BOTTOKEN);
     const stage = new Stage([textScene, imageScene], { ttl: 30 });
     bot.use(session());
     bot.use(stage.middleware());
@@ -328,7 +327,6 @@ const jiechaBot = () => {
                     };
             }
     });
-    bot.launch();
 }
 
 module.exports = {
