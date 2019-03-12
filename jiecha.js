@@ -6,7 +6,7 @@ const Scene = require('telegraf/scenes/base');
 const env = require('dotenv').load();
 const fs = require('fs');
 
-const jiechaBot = () => {
+const jiechaBot = (bot) => {
     var textRules = [];
     var imageRules = [];
     var paused = false;
