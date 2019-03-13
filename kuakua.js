@@ -6,7 +6,7 @@ const fs = require('fs');
 const kuakuaBot = (bot) => {
     let lib = [];
     // var imageRules = [];
-    const modifier = ['可爱的', '亲爱的', '牛逼的', '超棒的', '呆呆的', '肥肥的', '机智的'];
+    const modifier = ['可爱的', '亲爱的', '牛逼的', '超棒的', '机智的'];
 
     // load reply libraries
     lib = fs.readFileSync('kuakua.text', 'utf8').split('\n');
