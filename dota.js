@@ -4,6 +4,7 @@ const request = require('request');
 
 const dotaBot = (bot) => {
     let playerMap = new Map();
+    let heroMap = new Map();
     
     const savePlayers = (playerMap) => {
         let obj=[];
@@ -21,8 +22,17 @@ const dotaBot = (bot) => {
         }
     }
 
+    const readHeroes = () => {
+        let obj = JSON.parse(fs.readFileSync('heroes.json', 'utf8'));
+        for (hero of obj) {
+            heroMap.set(hero.id, hero.localized_name);
+        }
+    }
+
     // load players
     readPlayers();
+    // load heroes
+    readHeroes();
 
     const createReply = (name, match) => {
         var win;
@@ -31,7 +41,7 @@ const dotaBot = (bot) => {
         } else {
             win = !match.radiant_win;
         }
-        return `玩家${name}最近在${new Date(match.start_time*1000).toLocaleString('zh-Hans-CN', { timeZone: 'America/Vancouver' })}进行了一场比赛，激战了${Math.ceil(match.duration/60)}分钟，终于，他${win?'赢':'输'}了！他杀了${match.kills}个人，死了${match.deaths}次，助攻了${match.assists}次，KDA为${(match.kills+match.assists)/match.deaths}，真的是太${((match.kill+match.assists)/match.death)>2?'屌':'菜'}了！他走的是${match.lane===3?'上':match.lane===2?'中':'下'}路，作为${match.lane_role>3?'辅助':'凯瑞'}，他的GPM是${match.gold_per_min}，XPM是${match.xp_per_min}，总计造成了${match.hero_damage}点伤害。GGWP！`
+        return `玩家${name}最近在${new Date(match.start_time*1000).toLocaleString('zh-Hans-CN', { timeZone: 'America/Vancouver' })}进行了一场比赛，激战了${Math.ceil(match.duration/60)}分钟，终于，他${win?'赢':'输'}了！他玩的是${heroMap.get(match.hero_id)},他杀了${match.kills}个人，死了${match.deaths}次，助攻了${match.assists}次，KDA为${((match.kills+match.assists)/match.deaths).toFixed(2)}，真的是太${((match.kill+match.assists)/match.death).toFixed(2)>'2'?'屌':'菜'}了！他走的是${match.lane===3?'上':match.lane===2?'中':'下'}路，他的GPM是${match.gold_per_min}，XPM是${match.xp_per_min}，总计造成了${match.hero_damage}点伤害。GGWP！`
     }
 
     const savePlayersInterval = setInterval(() => {
