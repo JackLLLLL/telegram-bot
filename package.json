@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "dotenv": "^6.2.0",
+    "request": "^2.88.0",
     "telegraf": "^3.27.1",
     "telegraf-command-parts": "^1.0.3"
   },

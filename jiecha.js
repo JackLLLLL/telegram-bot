@@ -1,9 +1,7 @@
-const Telegraf = require('telegraf');
 const commandParts = require('telegraf-command-parts');
 const session = require('telegraf/session');
 const Stage = require('telegraf/stage');
 const Scene = require('telegraf/scenes/base');
-const env = require('dotenv').load();
 const fs = require('fs');
 
 const jiechaBot = (bot) => {
