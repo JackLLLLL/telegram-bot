@@ -6,7 +6,7 @@ const { dotaBot } = require('./dota');
 
 
 const bot = new Telegraf(process.env.BOTTOKEN);
+dotaBot(bot);
 kuakuaBot(bot);
 jiechaBot(bot);
-dotaBot(bot);
 bot.launch();
