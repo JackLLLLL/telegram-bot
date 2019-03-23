@@ -1,8 +1,10 @@
-# telegram-bot
-Jie cha wang ta lei le
+# Telegram Auto-replying Bot 
 
-### Features
-* pause and unpause
-* hear a keyword and then reply with sticker
-* hear a key-sticker and then reply with sticker
-* delete rule (keyword -> corresponding reply pair)
+Jie cha wang ta lei le! This is a Telegram bot which can be configured to reply to other users automatiaclly.
+
+## Features
+
+* Pause and unpause
+* Hear a keyword and then reply with sticker
+* Hear a key-sticker and then reply with sticker
+* Delete rule (keyword -> corresponding reply pair)
