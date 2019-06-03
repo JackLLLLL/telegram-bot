@@ -77,7 +77,7 @@ const dotaBot = (bot) => {
 
                     if (res.statusCode === 200) {
                         const match = JSON.parse(body)[0];
-                        const reply = createReply(name, match);
+                        let reply = createReply(name, match);
                         // xg special case
                         if (name === 'xg') {
                             reply.replace('太菜了', 'tdl，还买了好多眼，梅肯也出的很棒。');
