@@ -41,7 +41,7 @@ const dotaBot = (bot) => {
         } else {
             win = !match.radiant_win;
         }
-        return `玩家${name}最近在${new Date(match.start_time*1000).toLocaleString('zh-Hans-CN', { timeZone: 'America/Vancouver' })}进行了一场比赛，激战了${Math.ceil(match.duration/60)}分钟，终于，他${win?'赢':'输'}了！他玩的是${heroMap.get(match.hero_id)}，他杀了${match.kills}个人，死了${match.deaths}次，助攻了${match.assists}次，KDA为${((match.kills+match.assists)/ (match.deaths===0?1:match.deaths) ).toFixed(2)}，真的是太${((match.kills+match.assists)/match.deaths)>2?'屌':'菜'}了！他的GPM是${match.gold_per_min}，XPM是${match.xp_per_min}，总计造成了${match.hero_damage}点伤害，（wy赞助）输出经济比为${(match.hero_damage/((match.duration/60)*match.gold_per_min)).toFixed(2)}。GGWP！`
+        return `玩家${name}最近在${new Date(match.start_time*1000).toLocaleString('zh-Hans-CN', { timeZone: 'America/Vancouver' })}进行了一场比赛，激战了${Math.ceil(match.duration/60)}分钟，终于，他${win?'赢':'输'}了！他玩的是${heroMap.get(match.hero_id)}，他杀了${match.kills}个人，死了${match.deaths}次，助攻了${match.assists}次，KDA为${((match.kills+match.assists)/ (match.deaths===0?1:match.deaths) ).toFixed(2)}，真的是太${((match.kills+match.assists)/match.deaths)>2?'屌':'菜'}了！他的GPM是${match.gold_per_min}，XPM是${match.xp_per_min}，补了${match.last_hits}个刀，总计对英雄造成了${match.hero_damage}点伤害，对塔造成了${match.tower_damage}点伤害，英雄治疗${match.hero_healing}点，（wy赞助）输出经济比为${(match.hero_damage/((match.duration/60)*match.gold_per_min)).toFixed(2)}。GGWP！`
     }
 
     const savePlayersInterval = setInterval(() => {
@@ -78,6 +78,10 @@ const dotaBot = (bot) => {
                     if (res.statusCode === 200) {
                         const match = JSON.parse(body)[0];
                         const reply = createReply(name, match);
+                        // xg special case
+                        if (name === 'xg') {
+                            reply.replace('太菜了', 'tdl，还买了好多眼，梅肯也出的很棒。');
+                        }
                         ctx.reply(reply);
                     } else {
                         ctx.reply('Failed. Maybe reached api limit.');
