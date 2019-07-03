@@ -44,7 +44,7 @@ const kuakuaBot = (bot) => {
         } else {
             request.get('https://chp.shadiao.app/api.php?form_fengfeng', (err, res, body) => {
                 if (res.statusCode === 200) {
-                    ctx.reply(`{$ctx.state.command.splitArgs[0]}, ${body}`);
+                    ctx.reply(`${ctx.state.command.splitArgs[0]}, ${body}`);
                 } else {
                     ctx.reply('枫枫并不是很想理你');
                 }
