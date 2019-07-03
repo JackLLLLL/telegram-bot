@@ -28,6 +28,27 @@ const kuakuaBot = (bot) => {
             ctx.reply(concatSen(name));
         }
     });
+    
+    bot.command('chp', (ctx) => {
+        if (ctx.state.command.splitArgs.length > 1) {
+            ctx.reply("Please give me one name");
+        } else if (ctx.state.command.splitArgs[0] === '') {
+            request.get('https://chp.shadiao.app/api.php?form_fengfeng', (err, res, body) => {
+                if (res.statusCode === 200) {
+                    ctx.reply(body);
+                } else {
+                    ctx.reply('枫枫并不是很想理你');
+                }
+            })
+        } else {
+            request.get('https://chp.shadiao.app/api.php?form_fengfeng', (err, res, body) => {
+                if (res.statusCode === 200) {
+                    ctx.reply(`{$ctx.state.command.splitArgs[0]}, ${body}`);
+                } else {
+                    ctx.reply('枫枫并不是很想理你');
+                }
+            })
+        }
 }
 
 module.exports = {
