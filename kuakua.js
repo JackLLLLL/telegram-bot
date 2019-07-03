@@ -1,5 +1,6 @@
 const commandParts = require('telegraf-command-parts');
 const fs = require('fs');
+const request = require('request');
 
 const kuakuaBot = (bot) => {
     let lib = [];
