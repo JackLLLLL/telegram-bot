@@ -49,6 +49,7 @@ const kuakuaBot = (bot) => {
                 }
             })
         }
+    });
 }
 
 module.exports = {
