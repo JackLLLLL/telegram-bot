@@ -120,13 +120,13 @@ const dotaBot = (bot) => {
                 request.get(`https://api.opendota.com/api/players/${id}`, (err1, res1, body1) => {
                     if (res1.statusCode === 200) {
                         const profile = JSON.parse(body1).profile;
-                        console.log(profile)
+
                         // get steamID from dota2 profile
                         const steamID = profile.steamid;
                         request.get(`http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=632B287DF9E30A8C675CDA16AB3E51D2&steamids=${steamID}`, (err2, res2, body2) => {
                             if (res2.statusCode === 200) {
                                 const summary = JSON.parse(body2).response.players[0];
-                                console.log(summary, JSON.parse(body2))
+
                                 const reply = createOnlineStatusReply(profile.personaname, summary.personastate, summary.lastlogoff, summary.gameextrainfo);
                                 
                                 ctx.reply(reply);
