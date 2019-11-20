@@ -119,7 +119,7 @@ const dotaBot = (bot) => {
                 const id = playerMap.get(name);
                 request.get(`https://api.opendota.com/api/players/${id}`, (err1, res1, body1) => {
                     if (res1.statusCode === 200) {
-                        const profile = JSON.parse(body1);
+                        const profile = JSON.parse(body1).profile;
                         console.log(profile)
                         // get steamID from dota2 profile
                         const steamID = profile.steamid;
