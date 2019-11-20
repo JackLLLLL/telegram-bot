@@ -56,7 +56,14 @@ const dotaBot = (bot) => {
         };
         
         if (status === 0) {
-            return `${name}: ${statusMap[status]}, last online ${((Date.now()/1000 - lastLogoff) / 60).toFixed(0)} mins ago`;
+            const period = Date.now()/1000 - lastLogoff;
+            if (period < 3600) {
+                return `${name}: ${statusMap[status]}, last online ${(period / 60).toFixed(0)} mins ago`;
+            } else if (period < 86400) {
+                return `${name}: ${statusMap[status]}, last online ${(period / 3600).toFixed(0)} hrs ago`;
+            } else {
+                return `${name}: ${statusMap[status]}, last online ${(period / 86400).toFixed(0)} days ago`;
+            }
         } else if (status === 1 && gameInfo) {
             return `${name}: ${statusMap[status]}, playing ${gameInfo}`;
         } else {
