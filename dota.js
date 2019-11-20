@@ -110,7 +110,7 @@ const dotaBot = (bot) => {
         }
     });
     
-    bot.command('check', (ctx) => {
+    bot.command('sx', (ctx) => {
         if (ctx.state.command.splitArgs.length !== 1 || ctx.state.command.splitArgs[0] == '') {
             ctx.reply("Please give me one name.");
         } else {
