@@ -56,7 +56,7 @@ const dotaBot = (bot) => {
         };
         
         if (status === 0) {
-            return `${name}: ${statusMap[status]}, last online ${((lastLogoff - Date.now()/1000) / 60).toFixed(0)} mins ago`;
+            return `${name}: ${statusMap[status]}, last online ${((Date.now()/1000 - lastLogoff) / 60).toFixed(0)} mins ago`;
         } else if (status === 1 && gameInfo) {
             return `${name}: ${statusMap[status]}, playing ${gameInfo}`;
         } else {
