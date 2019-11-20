@@ -127,7 +127,7 @@ const dotaBot = (bot) => {
                             if (res2.statusCode === 200) {
                                 const summary = JSON.parse(body2).response.players[0];
 
-                                cosnt reply = createOnlineStatusReply(profile.personaname, summary.personastate, summary.lastlogoff, summary.gameextrainfo);
+                                const reply = createOnlineStatusReply(profile.personaname, summary.personastate, summary.lastlogoff, summary.gameextrainfo);
                                 
                                 ctx.reply(reply);
                             } else {
