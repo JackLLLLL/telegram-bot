@@ -1,6 +1,8 @@
 # Telegram Auto-replying Bot 
 
-Jie cha wang ta lei le! This is a Telegram bot which can be configured to reply to other users automatiaclly.
+Jie cha wang ta lei le!
+
+The Telegram bot is a scripted bot configured to automatically reply to users on steam. Additional functionalities include check player's online status, add/delete response options and check player's match history.
 
 ## Features
 
