@@ -583,5 +583,15 @@
         "name": "mars",
         "id": 129,
         "localized_name": "玛尔斯"
-    }
+    },
+    {
+        "name": "void_spirit",
+        "id": 126,
+        "localized_name": "紫猫"
+    },
+    {
+        "name": "snapfire",
+        "id": 128,
+        "localized_name": "老奶奶"
+    },
 ]
