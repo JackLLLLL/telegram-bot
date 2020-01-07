@@ -5,9 +5,11 @@
   "main": "index.js",
   "dependencies": {
     "dotenv": "^6.2.0",
+    "node-fetch": "^2.6.0",
     "request": "^2.88.0",
     "telegraf": "^3.27.1",
-    "telegraf-command-parts": "^1.0.3"
+    "telegraf-command-parts": "^1.0.3",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {},
   "scripts": {
