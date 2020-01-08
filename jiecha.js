@@ -11,13 +11,13 @@ const jiechaBot = (bot) => {
     var sender = 0;
 
     // load rules at start
-    textRules = JSON.parse(fs.readFileSync('text.json', 'utf8'));
-    imageRules = JSON.parse(fs.readFileSync('image.json', 'utf8'));
+    textRules = JSON.parse(fs.readFileSync('data/text.json', 'utf8'));
+    imageRules = JSON.parse(fs.readFileSync('data/image.json', 'utf8'));
 
     // rewrite rules into files
     const writeInterval = setInterval(() => {
-        fs.writeFileSync('text.json', JSON.stringify(textRules), 'utf8');
-        fs.writeFileSync('image.json', JSON.stringify(imageRules), 'utf8');
+        fs.writeFileSync('data/text.json', JSON.stringify(textRules), 'utf8');
+        fs.writeFileSync('data/image.json', JSON.stringify(imageRules), 'utf8');
     }, 1800*1000);
 
     // tidy rules every day

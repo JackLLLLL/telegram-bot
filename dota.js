@@ -11,11 +11,11 @@ const dotaBot = (bot) => {
         for ([name, id] of playerMap) {
             obj.push({ 'name': name, 'id': id });
         }
-        fs.writeFileSync('players.txt', JSON.stringify(obj), 'utf8');
+        fs.writeFileSync('data/players.json', JSON.stringify(obj), 'utf8');
     }
 
     const readPlayers = () => {
-        let obj = JSON.parse(fs.readFileSync('players.txt', 'utf8'));
+        let obj = JSON.parse(fs.readFileSync('data/players.json', 'utf8'));
         playerMap.clear();
         for (player of obj) {
             playerMap.set(player.name, player.id);
@@ -23,7 +23,7 @@ const dotaBot = (bot) => {
     }
 
     const readHeroes = () => {
-        let obj = JSON.parse(fs.readFileSync('heroes.json', 'utf8'));
+        let obj = JSON.parse(fs.readFileSync('data/heroes.json', 'utf8'));
         for (hero of obj) {
             heroMap.set(hero.id, hero.localized_name);
         }
