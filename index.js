@@ -7,6 +7,11 @@ const { movieBot } = require('./movie');
 const { busBot } = require('./bus');
 const { pingBot } = require('./ping');
 const { streamBot } = require('./stream');
+const express = require('express');
+const app = express();
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT);
 
 const bot = new Telegraf(process.env.BOTTOKEN);
 dotaBot(bot);
