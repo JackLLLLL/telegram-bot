@@ -3,7 +3,7 @@
 .ENV 
 
 # data
-*.json
+# *.json
 
 # modules
 /node_modules

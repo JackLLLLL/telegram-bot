@@ -8,7 +8,7 @@ const kuakuaBot = (bot) => {
     const modifier = ['可爱的', '亲爱的', '牛逼的', '超棒的', '机智的'];
 
     // load reply libraries
-    lib = fs.readFileSync('kuakua.txt', 'utf8').split('\n');
+    lib = fs.readFileSync('data/kuakua.txt', 'utf8').split('\n');
     // imageRules = JSON.parse(fs.readFileSync('image.json', 'utf8'));
 
     const getRandom = (max) => {

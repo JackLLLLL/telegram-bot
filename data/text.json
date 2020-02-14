@@ -1,0 +1,72 @@
+[
+    {
+        "trigger": "啥",
+        "rate": 50,
+        "reply": "CAADAQADGwADpuQeI_WemgbUL6NSAg",
+        "author": 245703276,
+        "firstName": "dw"
+    },
+    {
+        "trigger": "咋",
+        "rate": 50,
+        "reply": "CAADAQADGwADpuQeI_WemgbUL6NSAg",
+        "author": 245703276,
+        "firstName": "dw"
+    },
+    {
+        "trigger": "ddd",
+        "rate": 33,
+        "reply": "CAADAQADRwADpuQeI3t5xqNtPmpIAg",
+        "author": 245703276,
+        "firstName": "dw"
+    },
+    {
+        "trigger": "nb",
+        "rate": 20,
+        "reply": "CAADAQADRgADpuQeI9tBQ0rN4XNKAg",
+        "author": 245703276,
+        "firstName": "dw"
+    },
+    {
+        "trigger": "吗",
+        "rate": 15,
+        "reply": "CAADAQADGwADpuQeI_WemgbUL6NSAg",
+        "author": 245703276,
+        "firstName": "dw"
+    },
+    {
+        "trigger": "吃",
+        "rate": 10,
+        "reply": "CAADAQADLgADpuQeI3HUOrmbGdx4Ag",
+        "author": 245703276,
+        "firstName": "dw"
+    },
+    {
+        "trigger": "说",
+        "rate": 5,
+        "reply": "CAADAQADHwADpuQeI-wc7DeCGuJoAg",
+        "author": 245703276,
+        "firstName": "dw"
+    },
+    {
+        "trigger": "枫枫",
+        "rate": 50,
+        "reply": "CAADBQADCwADETCjCy5dztzIcSa1Ag",
+        "author": 245703276,
+        "firstName": "dw"
+    },
+    {
+        "trigger": "Aaa",
+        "rate": 80,
+        "reply": "CAADAQADhgADpuQeI1ijeShUwQYwAg",
+        "author": 671220910,
+        "firstName": "dong"
+    },
+    {
+        "trigger": "想吃",
+        "rate": 90,
+        "reply": "CAADAQADLgADpuQeI3HUOrmbGdx4Ag",
+        "author": 671220910,
+        "firstName": "dong"
+    }
+]

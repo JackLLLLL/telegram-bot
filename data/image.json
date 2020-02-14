@@ -1,0 +1,37 @@
+[
+    {
+        "trigger": "CAADAQADJQADpuQeI_A4z6FGprDBAg",
+        "rate": 60,
+        "reply": "CAADBQADaAADNYDMDiZIJ9idZV7sAg",
+        "author": 245703276,
+        "firstName": "dw"
+    },
+    {
+        "trigger": "CAADBQADCwYAAvTqdgnWwQV28Ag2YAI",
+        "rate": 30,
+        "reply": "CAADBQADCQYAAvTqdglPYLtvHcnlFwI",
+        "author": 245703276,
+        "firstName": "dw"
+    },
+    {
+        "trigger": "CAADAQADHQADpuQeI3OAn-k_vthVAg",
+        "rate": 15,
+        "reply": "CAADAQADHAADpuQeI8zbNwQCaf4hAg",
+        "author": 245703276,
+        "firstName": "dw"
+    },
+    {
+        "trigger": "CAADAQADTwADpuQeI99TOBMPC9aOAg",
+        "rate": 20,
+        "reply": "CAADAQADGwADpuQeI_WemgbUL6NSAg",
+        "author": 245703276,
+        "firstName": "dw"
+    },
+    {
+        "trigger": "CAADBQADUwIAAiyjCQOVfDn89bL64AI",
+        "rate": 30,
+        "reply": "CAADBQADUwIAAiyjCQOVfDn89bL64AI",
+        "author": 245703276,
+        "firstName": "dw"
+    }
+]

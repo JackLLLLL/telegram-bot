@@ -5,17 +5,17 @@ const request = require('request');
 const dotaBot = (bot) => {
     let playerMap = new Map();
     let heroMap = new Map();
-    
+
     const savePlayers = (playerMap) => {
-        let obj=[];
+        let obj = [];
         for ([name, id] of playerMap) {
-            obj.push({'name': name, 'id': id});
+            obj.push({ 'name': name, 'id': id });
         }
-        fs.writeFileSync('players.txt', JSON.stringify(obj), 'utf8');
+        fs.writeFileSync('data/players.json', JSON.stringify(obj), 'utf8');
     }
 
     const readPlayers = () => {
-        let obj = JSON.parse(fs.readFileSync('players.txt', 'utf8'));
+        let obj = JSON.parse(fs.readFileSync('data/players.json', 'utf8'));
         playerMap.clear();
         for (player of obj) {
             playerMap.set(player.name, player.id);
@@ -23,7 +23,7 @@ const dotaBot = (bot) => {
     }
 
     const readHeroes = () => {
-        let obj = JSON.parse(fs.readFileSync('heroes.json', 'utf8'));
+        let obj = JSON.parse(fs.readFileSync('data/heroes.json', 'utf8'));
         for (hero of obj) {
             heroMap.set(hero.id, hero.localized_name);
         }
@@ -36,14 +36,17 @@ const dotaBot = (bot) => {
 
     const createMatchCheckReply = (name, match) => {
         var win;
+        if (!match) {
+            return `不要xjb查`;
+        }
         if (match.player_slot < 128) {
             win = match.radiant_win;
         } else {
             win = !match.radiant_win;
         }
-        return `玩家${name}最近在${new Date(match.start_time*1000).toLocaleString('zh-Hans-CN', { timeZone: 'America/Vancouver' })}进行了一场比赛，激战了${Math.ceil(match.duration/60)}分钟，终于，他${win?'赢':'输'}了！他玩的是${heroMap.get(match.hero_id)}，他杀了${match.kills}个人，死了${match.deaths}次，助攻了${match.assists}次，KDA为${((match.kills+match.assists)/ (match.deaths===0?1:match.deaths) ).toFixed(2)}，真的是太${((match.kills+match.assists)/match.deaths)>2?'屌':'菜'}了！他的GPM是${match.gold_per_min}，XPM是${match.xp_per_min}，补了${match.last_hits}个刀，总计对英雄造成了${match.hero_damage}点伤害，对塔造成了${match.tower_damage}点伤害，英雄治疗${match.hero_healing}点，（wy赞助）输出经济比为${(match.hero_damage/((match.duration/60)*match.gold_per_min)).toFixed(2)}。GGWP！`
+        return `玩家${name}最近在${new Date(match.start_time * 1000).toLocaleString('zh-Hans-CN', { timeZone: 'America/Vancouver' })}进行了一场比赛，激战了${Math.ceil(match.duration / 60)}分钟，终于，他${win ? '赢' : '输'}了！他玩的是${heroMap.get(match.hero_id)}，他杀了${match.kills}个人，死了${match.deaths}次，助攻了${match.assists}次，KDA为${((match.kills + match.assists) / (match.deaths === 0 ? 1 : match.deaths)).toFixed(2)}，真的是太${((match.kills + match.assists) / match.deaths) > 2 ? '屌' : '菜'}了！他的GPM是${match.gold_per_min}，XPM是${match.xp_per_min}，补了${match.last_hits}个刀，总计对英雄造成了${match.hero_damage}点伤害，对塔造成了${match.tower_damage}点伤害，英雄治疗${match.hero_healing}点，输出经济比为${(match.hero_damage / ((match.duration / 60) * match.gold_per_min)).toFixed(2)}。GGWP！`
     }
-    
+
     const createOnlineStatusReply = (name, status, lastLogoff, gameInfo) => {
         const statusMap = {
             0: 'Offline',
@@ -54,9 +57,9 @@ const dotaBot = (bot) => {
             5: 'Looking to trade',
             6: 'Looking to play',
         };
-        
+
         if (status === 0) {
-            const period = Date.now()/1000 - lastLogoff;
+            const period = Date.now() / 1000 - lastLogoff;
             if (period < 3600) {
                 return `${name}: ${statusMap[status]}, last online ${(period / 60).toFixed(0)} mins ago`;
             } else if (period < 86400) {
@@ -73,7 +76,7 @@ const dotaBot = (bot) => {
 
     const savePlayersInterval = setInterval(() => {
         savePlayers(playerMap);
-    }, 3600*1000);
+    }, 3600 * 1000);
 
     bot.use(commandParts());
     bot.command('bind', (ctx) => {
@@ -116,7 +119,7 @@ const dotaBot = (bot) => {
             }
         }
     });
-    
+
     bot.command('sx', (ctx) => {
         if (ctx.state.command.splitArgs.length !== 1 || ctx.state.command.splitArgs[0] == '') {
             ctx.reply("Please give me one name.");
@@ -127,6 +130,10 @@ const dotaBot = (bot) => {
                 request.get(`https://api.opendota.com/api/players/${id}`, (err1, res1, body1) => {
                     if (res1.statusCode === 200) {
                         const profile = JSON.parse(body1).profile;
+                        if(!profile) {
+                            ctx.reply('叫你不要xjb查');
+                            return;
+                        }
 
                         // get steamID from dota2 profile
                         const steamID = profile.steamid;
@@ -135,7 +142,7 @@ const dotaBot = (bot) => {
                                 const summary = JSON.parse(body2).response.players[0];
 
                                 const reply = createOnlineStatusReply(profile.personaname, summary.personastate, summary.lastlogoff, summary.gameextrainfo);
-                                
+
                                 ctx.reply(reply);
                             } else {
                                 ctx.reply('Failed. steam api error.');
